@@ -17,8 +17,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -74,6 +74,14 @@ public class AuthService {
         verificationToken.orElseThrow(() -> new SpringRedditException("Invalid Token"));
 
         fetchUserAndEnable(verificationToken.get());
+    }
+
+    @Transactional(readOnly = true)
+    public User getCurrentUser() {
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.
+                getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(principal.getUsername())
+                .orElseThrow(() -> new SpringRedditException("User name not found - " + principal.getUsername()));
     }
 
     @Transactional
