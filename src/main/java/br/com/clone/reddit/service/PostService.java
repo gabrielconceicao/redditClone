@@ -40,15 +40,11 @@ public class PostService {
                 .collect(toList());
     }
 
-    public PostResponse createPost(PostRequest postRequest) {
+    public void createPost(PostRequest postRequest) {
         Subreddit subreddit = subredditRepository.findByName(postRequest.getSubredditName())
                 .orElseThrow(() -> new SubredditNotFoundException("Not found Subreddit name" + postRequest.getSubredditName()));
 
-        User currentUser = authService.getCurrentUser();
-        Post post = postMapper.map(postRequest, subreddit, currentUser);
-
-        postRepository.save(post);
-        return postMapper.mapToDto(post);
+        postRepository.save(postMapper.map(postRequest, subreddit, authService.getCurrentUser()));
     }
 
     public PostResponse getPost(Long id) {
