@@ -2,7 +2,6 @@ package br.com.clone.reddit.controller;
 
 import br.com.clone.reddit.dto.PostRequest;
 import br.com.clone.reddit.dto.PostResponse;
-import br.com.clone.reddit.model.Post;
 import br.com.clone.reddit.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping("/api/posts/")
 @AllArgsConstructor
 public class PostController {
 
@@ -20,16 +19,32 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PostResponse>> getAllPosts() {
-        return ResponseEntity
-                .status(HttpStatus.OK)
+        return ResponseEntity.status(HttpStatus.OK)
                 .body(postService.getAll());
     }
 
     @PostMapping
     public ResponseEntity<PostResponse> create(@RequestBody PostRequest postRequest){
         return ResponseEntity.status(HttpStatus.CREATED)
-                             .body(postService.createPost(postRequest));
+                .body(postService.createPost(postRequest));
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postService.getPost(id));
+    }
+
+    @GetMapping("/subreddit/{id}")
+    public ResponseEntity<List<PostResponse>> getPostsBySubreddit(Long subredditId) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postService.getPostsBySubredditId(subredditId));
+    }
+
+    @GetMapping("user/{username}")
+    public ResponseEntity<List<PostResponse>> getPostByUsername(@PathVariable String username) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(postService.getPostsByUsername(username));
     }
 
 
