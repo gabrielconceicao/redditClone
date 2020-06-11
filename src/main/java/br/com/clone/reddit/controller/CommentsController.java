@@ -2,6 +2,7 @@ package br.com.clone.reddit.controller;
 
 import br.com.clone.reddit.dto.CommentsDto;
 import br.com.clone.reddit.service.CommentsService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Api(value = "Comments")
 @RequestMapping("api/comments/")
 public class CommentsController {
 

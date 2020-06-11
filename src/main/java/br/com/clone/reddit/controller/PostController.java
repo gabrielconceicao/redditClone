@@ -3,6 +3,7 @@ package br.com.clone.reddit.controller;
 import br.com.clone.reddit.dto.PostRequest;
 import br.com.clone.reddit.dto.PostResponse;
 import br.com.clone.reddit.service.PostService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Api(value = "Post")
 @RequestMapping("/api/posts/")
 @AllArgsConstructor
 public class PostController {

@@ -2,6 +2,7 @@ package br.com.clone.reddit.controller;
 
 import br.com.clone.reddit.dto.SubredditDto;
 import br.com.clone.reddit.service.SubredditService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Api(value = "Subreddit")
 @RequestMapping("/api/subreddit")
 @AllArgsConstructor
 @Slf4j

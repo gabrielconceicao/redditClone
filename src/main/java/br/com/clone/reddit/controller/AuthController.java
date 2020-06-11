@@ -4,11 +4,10 @@ import br.com.clone.reddit.dto.AuthenticationResponse;
 import br.com.clone.reddit.dto.LoginRequest;
 import br.com.clone.reddit.dto.RefreshTokenRequest;
 import br.com.clone.reddit.dto.RegisterRequest;
-import br.com.clone.reddit.model.RefreshToken;
 import br.com.clone.reddit.service.AuthService;
 import br.com.clone.reddit.service.RefreshTokenService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@Api(value = "Auth")
 @RequestMapping("/api/auth")
 @AllArgsConstructor
 public class AuthController {
